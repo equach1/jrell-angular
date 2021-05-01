@@ -1,0 +1,24 @@
+<span id="repo-list">
+  <span *ngIf="repoList">
+    <div *ngFor="let index of repoList.items" class="card" style="width: 13rem; display: inline-block;">
+      <img [src]="index['owner']['avatar_url']" class="card-img-top" alt="user image">
+      <div class="card-body">
+        <div class="card-text">
+          <h5 class="card-title"> {{ index['name'] }}</h5>
+          <ul>
+            <li><b>Number of open issues:</b> {{ index['open_issues_count'] }}</li>
+            <li><b>Number of stargazers:</b> {{ index['stargazers_count'] }}</li>
+            <li><b>Number of watchers:</b> {{ index['watchers_count'] }}</li>
+            <li><b>Language:</b> {{ index['language'] }}</li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn-primary" [routerLink]="[ '/repodetail', index['owner']['login'], index['name'] ]">Repo Detail</button>
+      </div>
+    </div>
+    <span *ngIf="repoList.total_count == 0">
+      <div class="alert alert-danger" role="alert">
+        No repositories found.
+      </div>
+    </span>
+  </span>
+</span>

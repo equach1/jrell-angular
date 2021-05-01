@@ -1,0 +1,57 @@
+<div *ngIf="repo">
+  <div class="card mx-auto" style="width: 18rem;">
+    <div class="card-body">
+      <h3 class="card-title" style="text-align: center;">{{ repo['name'] }}</h3>
+      <div class="card-text">
+        <ul>
+          <li><b>Description:</b> {{ repo['description'] }}</li>
+          <li><b>Number of stargazers:</b> {{ repo['stargazers_count'] }}</li>
+          <li><b>Number of watchers:</b> {{ repo['watchers_count'] }}</li>
+          <li><b>Number of forks:</b> {{ repo['forks_count'] }}</li>
+          <li><b>Number of open issues:</b> {{ repo['open_issues_count'] }}</li>
+          <li><b>Language:</b> {{ repo['language'] }}</li>
+          <li><b>Clone URL:</b> {{ repo['clone_url'] }}</li>
+        </ul>
+      </div>
+      <a href="{{ repo['html_url'] }}" class="btn btn-primary">Github Repo Link</a>
+    </div>
+  </div>
+  <br><br>
+  <h3 style="text-align: center;">Last 5 Commits</h3>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Login</th>
+        <th scope="col">Commit Message</th>
+        <th scope="col">Comment Count</th>
+        <th scope="col">Commit Link</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of repoCommits; let i = index">
+      <tr *ngIf="i < 5">
+        <td>{{ item['author']['login'] }}</td>
+        <td>{{ item['commit']['message'] }}</td>
+        <td>{{ item['commit']['comment_count'] }}</td>
+        <td><a type="button" class="btn btn-primary" href="{{ item['html_url'] }}">Commit Link</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <h3 style="text-align: center;">Last 5 Issues</h3>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Create Date</th>
+        <th scope="col">Issue Link</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of repoIssues; let i = index">
+      <tr *ngIf="i < 5">
+        <td>{{ item['title'] }}</td>
+        <td>{{ item['created_at'] }}</td>
+        <td><a type="button" class="btn btn-primary" href="{{ item['html_url'] }}">Issue Link</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

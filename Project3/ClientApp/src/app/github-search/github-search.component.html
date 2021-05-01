@@ -1,0 +1,32 @@
+<h3>Search for GitHub Repos and Users</h3>
+<form class="form-inline" [formGroup]="searchForm" (ngSubmit)="searchGitHub(false)" style="display: inline-block;">
+  <label class="sr-only" for="inlineFormInputName2">Query</label>
+  <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Search Key" formControlName="query">
+  <button type="submit" class="btn btn-primary mb-2" style="margin-right: 10px;">Search for Users</button>
+</form>
+<button id="repo-button" type="submit" class="btn btn-primary mb-2" (click)="repoClicked()">Search for Repos</button>
+<br><br>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+<app-user-list [userList]="results" id="user-grid"></app-user-list>
+<app-repo-list [repoList]="repoResult" id="repo-grid"></app-repo-list>
+<div *ngIf="results" class="row justify-content-center">
+  <div class="col-2">
+    <fa-icon [icon]="faChevronLeft" (click)="prevUsers()" *ngIf="prevUserPageExists"></fa-icon>
+  </div>
+  <div class="col-2">
+    <fa-icon [icon]="faChevronRight" (click)="nextUsers()" *ngIf="nextUserPageExists"></fa-icon>
+  </div>
+</div>
+<br>
+
+<div *ngIf="repoResult" class="row justify-content-center">
+  <div class="col-2">
+    <fa-icon [icon]="faChevronLeft" (click)="prevRepos()" *ngIf="prevRepoPageExists"></fa-icon>
+  </div>
+  <div class="col-2">
+    <fa-icon [icon]="faChevronRight" (click)="nextRepos()" *ngIf="nextRepoPageExists"></fa-icon>
+  </div>
+</div>
+<br>

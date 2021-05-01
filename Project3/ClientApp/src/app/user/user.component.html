@@ -1,0 +1,54 @@
+<div *ngIf="user">
+  <div class="card mx-auto" style="width: 18rem;">
+    <img [src]="user.avatar_url" class="card-img-top" alt="user image">
+    <div class="card-body">
+      <h5 class="card-title">{{ user.login }}</h5>
+      <div class="card-text">
+        <ul>
+          <li *ngIf="user.name"><b>Name:</b> {{ user.name }}</li>
+          <li *ngIf="user.blog"><b>Blog:</b> {{ user.blog }}</li>
+          <li *ngIf="user.location"><b>Location:</b> {{ user.location }}</li>
+        </ul>
+      </div>
+      <a href="{{ user.html_url }}" class="btn btn-primary">GitHub Page</a>
+    </div>
+  </div>
+  <br><br>
+  <h3 style="text-align: center;">User Repositories</h3>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Stargazer Count</th>
+        <th scope="col">Open Issue Count</th>
+        <th scope="col">Language</th>
+        <th scope="col">Repo Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let index of repos">
+        <td>{{ index['name'] }}</td>
+        <td>{{ index['stargazers_count'] }}</td>
+        <td>{{ index['open_issues_count'] }}</td>
+        <td>{{ index['language'] }}</td>
+        <td><button type="button" class="btn btn-primary" [routerLink]="[ '/repodetail', index['owner']['login'], index['name'] ]">Repo Detail</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <h3 style="text-align: center;">User Followers</h3>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Login</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let index of followers">
+        <td>{{ index['login'] }}</td>
+        <td><img [src]="index['avatar_url']" class="card-img-top" alt="user image" style="width: 15%;"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
